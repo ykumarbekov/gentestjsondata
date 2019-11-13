@@ -1,12 +1,14 @@
 import argparse as arg
 import os
 import sys
+from tools import *
 
 
 class ArgParser(object):
 
     def __init__(self, d_data):
         self.d_data = d_data
+        self.log = create_logger()
 
     def parse_args(self):
         result = {}
@@ -35,6 +37,7 @@ class ArgParser(object):
         )
         parser.add_argument(
             "--file-prefix",
+            choices=["count", "random", "uuid"],
             help="Prefix for output files, use: count|random|uuid. Default: {}".format(self.d_data["file-prefix"]),
             default=self.d_data["file-prefix"],
             dest="file_prefix"
@@ -77,10 +80,12 @@ class ArgParser(object):
             output_path = p
         # *********************
         if not os.path.exists(output_path):
-            print("Cannot find {}".format(output_path))
+            print("Cannot find: {}".format(output_path))
+            self.log.warning("Cannot find: {}".format(output_path))
             sys.exit(-1)
         if not os.path.isdir(output_path):
             print("Output path is not directory")
+            self.log.warning("Output path is not directory")
             sys.exit(-1)
 
         return output_path
@@ -88,6 +93,7 @@ class ArgParser(object):
     def files_count_validator(self, c):
         if c < 0:
             print("File count parameter negative")
+            self.log.warning("File count parameter negative")
             sys.exit(-1)
 
         return c
