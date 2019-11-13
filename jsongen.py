@@ -27,7 +27,7 @@ class JsonGenData(object):
 
     def data_schema_parser(self):
         print("Start generating schema from data")
-        self.generate_json_row(self.json_parser(self.schema))
+        print(self.generate_json_row(self.json_parser(self.schema)))
         # *********************
         print("Output files: ")
         for f in self.output_files():
@@ -59,23 +59,39 @@ class JsonGenData(object):
         ddd = {}
         cnt = 0
         for k, v in dd.items():
-            print("{}:{}".format(k, v))
-            if len(v.split(":")) == 1:
-                if v == "timestamp":
+            print("{} - {}".format(k, v))
+            if len(v.split(":")) == 1 or (len(v.split(":")) == 2 and len(v.split(":")[1]) == 0):
+                if "timestamp" in v and ":" in v:
+                    self.log.warning("Schema element: {}:{} contains empty char ':' ".format(k, v))
                     ddd[k] = time.time()
                     cnt += 1
-                elif v == "str":
+                elif "timestamp" in v:
+                    ddd[k] = time.time()
+                    cnt += 1
+                elif "str" in v and ":" not in v:
                     ddd[k] = ""
                     cnt += 1
-                elif v == "int":
+                elif "str" in v and ":" in v:
+                    self.log.warning("Schema element: {}:{} contains empty char ':' ".format(k, v))
+                    ddd[k] = ""
+                    cnt += 1
+                elif "int" in v and ":" not in v:
+                    ddd[k] = None
+                    cnt += 1
+                elif "int" in v and ":" not in v:
+                    self.log.warning("Schema element: {}:{} contains empty char ':' ".format(k, v))
                     ddd[k] = None
                     cnt += 1
                 elif v != "timestamp" and v != "str" and v != "int" and "[" and "]" in str(v):
                     ddd[k] = rnd_list_value(v.rstrip("]").lstrip("[").split(","))
                     cnt += 1
+            # ***************************
+            # ***************************
             elif len(v.split(":")) == 2:
                 if v.split(":")[0] == "str" and v.split(":")[1] == "rand":
-                    pass
+                    ddd[k] = str(uuid.uuid4().hex)
+                elif v.split(":")[0] == "int" and v.split(":")[1] == "rand":
+                    ddd[k] = str(random.randint(0, 10000))
 
         return ddd
 
