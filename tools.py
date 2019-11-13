@@ -1,4 +1,5 @@
 import logging
+import random
 
 
 def create_logger():
@@ -14,3 +15,9 @@ def create_logger():
     logger.addHandler(fh)
     return logger
 
+
+def rnd_list_value(lst):
+    if len(lst) > 0:
+        return lst[random.randint(0, len(lst)-1)]
+    else:
+        return ""

@@ -23,8 +23,8 @@ def start():
     json_gnr = jg.JsonGenData(args)
     json_gnr.run_generator()
 
-    for k, v in args.items():
-        print("{}: {}".format(k, v))
+    # for k, v in args.items():
+    #    print("{}: {}".format(k, v))
 
 
 if __name__ == "__main__":
