@@ -56,8 +56,8 @@ class ArgParser(object):
         )
         parser.add_argument(
             "--clear-output-data",
-            help="Flag, to delete -1 or keep -0 previous generated data. Default: {}"
-                .format(self.d_data["clear-output-data"]),
+            choices=[0, 1],
+            help="Flag, for cleaning previous generated data. Default: {}".format(self.d_data["clear-output-data"]),
             default=self.d_data["clear-output-data"],
             dest="clear_data"
         )
@@ -80,21 +80,18 @@ class ArgParser(object):
             output_path = p
         # *********************
         if not os.path.exists(output_path):
-            print("Cannot find: {}".format(output_path))
             self.log.warning("Cannot find: {}".format(output_path))
             sys.exit(-1)
         if not os.path.isdir(output_path):
-            print("Output path is not directory")
             self.log.warning("Output path is not directory")
-            sys.exit(-1)
+            sys.exit(1)
 
         return output_path
 
     def files_count_validator(self, c):
         if c < 0:
-            print("File count parameter negative")
             self.log.warning("File count parameter negative")
-            sys.exit(-1)
+            sys.exit(1)
 
         return c
 

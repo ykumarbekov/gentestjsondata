@@ -22,16 +22,13 @@ class DataProcessor(object):
     def run_process(self):
         if len(self.output_files()) == 0:
             self.log.info("Started generating data for console output")
-            print("Started generating data for console output")
             for i in range(self.cnt_output):
                 print(self.json_gnr.run_generator())
         else:
             self.log.info("Started generating data for output files")
-            print("Started generating data for output files")
             try:
                 for f in self.output_files():
                     self.log.info("Saving in file {} ...".format(f))
-                    print("Saving in file {} ...".format(f))
                     with open(f, "w+") as ff:
                         for i in range(self.cnt_output):
                             json.dump(self.json_gnr.run_generator(), ff)

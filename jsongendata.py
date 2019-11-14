@@ -70,7 +70,6 @@ class JsonGenData(object):
                         ddd[k] = str(random.randint(0, 10000))
                         cnt += 1
                     elif v.split(":")[0] == "str" and "rand" in v.split(":")[1] and ("(" and ")" in v.split(":")[1]):
-                        print("You cannot use {} with str type".format(v.split(":")[1]))
                         self.log.warning("You cannot use {} with str type".format(v.split(":")[1]))
                         sys.exit(1)
                     elif v.split(":")[0] == "int" and "rand" in v.split(":")[1] and ("(" and ")" in v.split(":")[1]):
