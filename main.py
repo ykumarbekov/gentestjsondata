@@ -1,5 +1,6 @@
 import argparser as t
-import jsongen as jg
+# import jsongendata as jg
+import processor as pr
 import configparser
 import os
 import sys
@@ -20,8 +21,8 @@ def start():
     arg_parser = t.ArgParser(config['DEFAULT'])
     args = arg_parser.parse_args()
 
-    json_gnr = jg.JsonGenData(args)
-    json_gnr.run_generator()
+    p = pr.DataProcessor(args)
+    p.run_process()
 
     # for k, v in args.items():
     #    print("{}: {}".format(k, v))
