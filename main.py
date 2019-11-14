@@ -1,5 +1,4 @@
 import argparser as t
-# import jsongendata as jg
 import processor as pr
 import configparser
 import os
@@ -23,9 +22,6 @@ def start():
 
     p = pr.DataProcessor(args)
     p.run_process()
-
-    # for k, v in args.items():
-    #    print("{}: {}".format(k, v))
 
 
 if __name__ == "__main__":

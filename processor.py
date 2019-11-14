@@ -13,19 +13,25 @@ class DataProcessor(object):
         self.prefix = d_data["file_prefix"]
         self.output_path = d_data["output_path"]
         self.filename = d_data["filename"]
-        self.cnt_output = d_data["output_data_lines"]
+        self.cnt_output = int(d_data["output_lines"])
         self.log = create_logger()
         self.json_gnr = jg.JsonGenData(d_data)
 
     def run_process(self):
         if len(self.output_files()) == 0:
-            print("Output to console")
-            print(self.json_gnr.run_generator())
+            self.log.info("Started generating data for console output")
+            print("Started generating data for console output")
+            for i in range(self.cnt_output):
+                print(self.json_gnr.run_generator())
         else:
-            print("Output to files ")
-            print(self.json_gnr.run_generator())
+            self.log.info("Started generating data for output files")
+            print("Started generating data for output files")
             for f in self.output_files():
-                print("File: {}".format(f))
+                self.log.info("Saving in file {} ...".format(f))
+                print("Saving in file {} ...".format(f))
+                with open(f) as ff:
+                    for i in range(self.cnt_output):
+                        ff.write(self.json_gnr.run_generator())
 
     def output_files(self):
         f_names = []
@@ -33,7 +39,7 @@ class DataProcessor(object):
             if self.prefix == "count":
                 for n in range(self.fc):
                     f_names.append(os.path.join(self.output_path, str(n)+"_"+self.filename))
-            elif self.d_data["file_prefix"] == "random":
+            elif self.prefix == "random":
                 for n in range(self.fc):
                     f_names.append(os.path.join(self.output_path, str(rnd.randint(0, 100000)) + "_" + self.filename))
             else:

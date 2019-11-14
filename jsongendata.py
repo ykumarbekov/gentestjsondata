@@ -35,7 +35,7 @@ class JsonGenData(object):
         cnt = 0
         try:
             for k, v in dd.items():
-                print("{} - {}".format(k, v))
+                # print("{} - {}".format(k, v))
                 if len(v.split(":")) == 1 or (len(v.split(":")) == 2 and len(v.split(":")[1]) == 0):
                     if "timestamp" in v and ":" in v:
                         self.log.warning("Schema element: {}:{} contains empty char ':' Fixed.".format(k, v))
