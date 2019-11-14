@@ -13,7 +13,7 @@ def start():
     if not os.path.exists("default.ini"):
         print("Cannot find configuration file: default.ini")
         log.warning("Cannot find configuration file: default.ini")
-        sys.exit(-1)
+        sys.exit(1)
 
     config = configparser.ConfigParser()
     config.read("default.ini")

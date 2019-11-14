@@ -3,6 +3,8 @@ from tools import *
 import os
 import random as rnd
 import uuid
+import json
+import sys
 
 
 class DataProcessor(object):
@@ -26,12 +28,17 @@ class DataProcessor(object):
         else:
             self.log.info("Started generating data for output files")
             print("Started generating data for output files")
-            for f in self.output_files():
-                self.log.info("Saving in file {} ...".format(f))
-                print("Saving in file {} ...".format(f))
-                with open(f) as ff:
-                    for i in range(self.cnt_output):
-                        ff.write(self.json_gnr.run_generator())
+            try:
+                for f in self.output_files():
+                    self.log.info("Saving in file {} ...".format(f))
+                    print("Saving in file {} ...".format(f))
+                    with open(f, "w+") as ff:
+                        for i in range(self.cnt_output):
+                            json.dump(self.json_gnr.run_generator(), ff)
+                            ff.write("\n")
+            except Exception as ex:
+                self.log.error(ex)
+                sys.exit(1)
 
     def output_files(self):
         f_names = []
