@@ -1,0 +1,25 @@
+Console utility to generate test data
+------------------------
+- Structure:
+
+1. main.py: Start process
+
+2. argparser.py: Parsing, validation program arguments
+   - Constructor: initialization: d_data, logger
+   - Main function: parse_args
+     input: dict default.ini [DEFAULT]
+     output: dict result with validated arguments
+
+3. processor.py: Run main process for generating and saving results to files
+   - Constructor: initialization: d_data, logger, local parameters, class: JsonGenData
+   - Main function: run_process
+     input: None (uses class variables)
+     output: None (creates files or outputs to console)
+
+4. jsongendata.py: Additional class uses for parsing schema and generating output JSON row
+   - Constructor: initialization: d_data, logger, schema (from file or from command line)
+   - Main function: run_generator -> generate_json_row
+     input: None - run function: generate_json_row
+     output: generated dict.
+
+ 5. tools.py: Creates logger

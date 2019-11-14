@@ -22,12 +22,13 @@ class JsonGenData(object):
         else:
             self.schema = self.d_data["schema"]
 
-    def json_parser(self, json_data):
+    def __json_parser(self, json_data):
         try:
             return json.loads(json_data)
         except Exception as ex:
             self.log.error(ex)
-            sys.exit(1)
+            return {}
+            # sys.exit(1)
 
     def generate_json_row(self, dd):
         ddd = {}
@@ -84,14 +85,15 @@ class JsonGenData(object):
             self.log.error(ex)
             sys.exit(1)
 
-        if cnt != len(ddd):
-            print("Number of processed elements: {} doesn't equal actual elements: {}".format(cnt, len(ddd)))
-            self.log.warning("Number of processed elements: {} doesn't equal actual elements: {}".format(cnt, len(ddd)))
-            sys.exit(1)
+        if cnt != len(self.__json_parser(self.schema)):
+            # print("Number of processed elements: {} doesn't equal actual elements: {}".format(cnt, len(self.__json_parser(self.schema))))
+            self.log.warning("Number of processed elements: {} doesn't equal actual elements: {}".format(cnt, len(self.__json_parser(self.schema))))
+            # sys.exit(1)
+            # return {}
 
         return ddd
 
     def run_generator(self):
-        return self.generate_json_row(self.json_parser(self.schema))
+        return self.generate_json_row(self.__json_parser(self.schema))
 
 
