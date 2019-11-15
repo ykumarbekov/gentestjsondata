@@ -31,8 +31,9 @@ Example of incorrect schema:
 
 _{"date":"timestamp:", "name": "str:rand", "type":"['client', 'partner', 'government']", "age": "float:rand"}'_
 
-WARNING - Number of processed elements: 3 doesn't equal actual elements: 4
-As we see age cannot be float:random
+Output message: WARNING - Number of processed elements: 3 doesn't equal actual elements: 4
+As we see: age contains wrong type
+
 ------------------------
 
 Using test cases:
