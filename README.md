@@ -40,7 +40,7 @@ Using test cases:
 run: python test_gentestdata.py -v
 
 Example of running test cases
-
+![unittest_example](https://raw.githubusercontent.com/ykumarbekov/gentestjsondata/statuc/unittest_example.png)
 ------------------------
 
 - Short project structure:
