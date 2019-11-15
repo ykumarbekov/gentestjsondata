@@ -22,22 +22,20 @@ python main.py --file-count=3 \
 --clear-output-data=1
 
 Generated data
-{"date": 1573824466.167286, "name": "a20f05d8d82a4d878864c2bbd6feb4f2", "type": " partner", "age": "41"}
-{"date": 1573824466.167349, "name": "901158261ab142dab9103d27854948fa", "type": "client", "age": "78"}
+_{"date": 1573824466.167286, "name": "a20f05d8d82a4d878864c2bbd6feb4f2", "type": " partner", "age": "41"}_
+_{"date": 1573824466.167349, "name": "901158261ab142dab9103d27854948fa", "type": "client", "age": "78"}_
 ...
 
 Example of incorrect schema:
 
-{"date":"timestamp:", "name": "str:rand", "type":"['client', 'partner', 'government']", "age": "float:rand"}'
+_{"date":"timestamp:", "name": "str:rand", "type":"['client', 'partner', 'government']", "age": "float:rand"}'_
 WARNING - Number of processed elements: 3 doesn't equal actual elements: 4
 As we see age cannot be float:random
-------------------------
 ------------------------
 
 Using test cases:
 run: python test_gentestdata.py -v
 
-------------------------
 ------------------------
 
 - Short project structure:
