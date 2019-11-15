@@ -39,6 +39,8 @@ As we see: age contains wrong type
 Using test cases:
 run: python test_gentestdata.py -v
 
+Example of running test cases
+
 ------------------------
 
 - Short project structure:
