@@ -29,17 +29,7 @@ def start():
         clear_folder(args["output_path"], args["filename"])
 
     # Generating output data, as input parameters - dictionary with parsed values
-    # pr.DataProcessor(args).run_process()
-
-    '''
-    for i in output_files(
-        args["file_count"],
-        args["file_prefix"],
-        args["output_path"],
-        args["filename"]
-    ):
-        print("File: {}".format(i))
-    '''
+    pr.DataProcessor(args).run_process()
 
 
 if __name__ == "__main__":

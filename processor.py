@@ -29,6 +29,11 @@ class DataProcessor(object):
         self.json_gnr = jg.JsonGenData(d_data)
 
     def run_process(self):
+        '''
+        run_process starts generating and saving data to files
+        before saving it validates schema and raises exception if schema is not valid
+        :return: None
+        '''
         output_f = output_files(
             self.fc,
             self.prefix,
