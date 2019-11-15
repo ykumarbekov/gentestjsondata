@@ -1,25 +1,43 @@
-Console utility to generate test data
+GENTESTDATA - Console utility to generate test data in JSON format based on input schema
 ------------------------
-- Structure:
+run:
+    python main.py options, or python main.py --h|help
 
-1. main.py: Start process
+program arguments:
+    output-path: Output path for generated files
+    file-name: file name uses as base name for generated files
+    file-count: number of generated files, must be 0 or above
+    file-prefix: prefix for generated files, can be - count, random or uuid
+    schema: JSON schema, can be file or row passed as program argument
+    data-lines: number of lines in generated files
+    clear-output-data: remove previously generated files, based on base file name
 
+By default utility reads configuration values from default.ini, which uses as initialization data and
+can be used without non-obligatory parameters
+
+Schema example:
+{"date":"timestamp:", "name": "str:rand", "type”:"['client', 'partner', 'government']", "age": "int:rand(1, 90)}
+
+Generated data
+{"date": 1573824466.167286, "name": "a20f05d8d82a4d878864c2bbd6feb4f2", "type": " partner", "age": "41"}
+{"date": 1573824466.167349, "name": "901158261ab142dab9103d27854948fa", "type": "client", "age": "78"}
+...
+
+{"date":"timestamp:", "name": "str:rand", "type":"['client', 'partner', 'government']", "age": "float:rand"}'
+WARNING - Number of processed elements: 3 doesn't equal actual elements: 4
+As we see age cannot be float:random
+------------------------
+------------------------
+
+Using test cases:
+run: python test_gentestdata.py -v
+
+------------------------
+------------------------
+
+- Short project structure:
+1. main.py: Start main function - run process
 2. argparser.py: Parsing, validation program arguments
-   - Constructor: initialization: d_data, logger
-   - Main function: parse_args
-     input: dict default.ini [DEFAULT]
-     output: dict result with validated arguments
-
 3. processor.py: Run main process for generating and saving results to files
-   - Constructor: initialization: d_data, logger, local parameters, class: JsonGenData
-   - Main function: run_process
-     input: None (uses class variables)
-     output: None (creates files or outputs to console)
-
 4. jsongendata.py: Additional class uses for parsing schema and generating output JSON row
-   - Constructor: initialization: d_data, logger, schema (from file or from command line)
-   - Main function: run_generator -> generate_json_row
-     input: None - run function: generate_json_row
-     output: generated dict.
-
- 5. tools.py: Creates logger
+5. tools.py: different useful functions
