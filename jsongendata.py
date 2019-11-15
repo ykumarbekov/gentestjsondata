@@ -1,12 +1,23 @@
-import os
-import uuid
 import json
 from tools import *
 import sys
 import time
+import random
 
 
 class JsonGenData(object):
+    '''
+    Filename: jsongendata.py. Class: JsonGenData
+
+    The JsonGenData uses for parsing input JSON schema and generating output row
+    Class contains main function:
+    - generate_json_row
+        Use generate_json_row, to parse and validate program arguments
+
+    Constructor
+        Initializes schema parameter from file or from command argument
+        Input parameter: d_data - dictionary contains program arguments
+    '''
 
     def __init__(self, d_data):
         self.d_data = d_data
@@ -28,7 +39,6 @@ class JsonGenData(object):
         except Exception as ex:
             self.log.error(ex)
             return {}
-            # sys.exit(1)
 
     def generate_json_row(self, dd):
         ddd = {}
@@ -55,7 +65,7 @@ class JsonGenData(object):
                         ddd[k] = None
                         cnt += 1
                     elif "int" in v and ":" not in v:
-                        self.log.warning("Schema element: {}:{} contains empty char ':' ".format(k, v))
+                        self.log.warning("Schema element: {}:{} contains empty char ':' Fixed. ".format(k, v))
                         ddd[k] = None
                         cnt += 1
                     elif v != "timestamp" and v != "str" and v != "int" and "[" and "]" in str(v):
@@ -85,7 +95,6 @@ class JsonGenData(object):
             sys.exit(1)
 
         if cnt != len(self.__json_parser(self.schema)):
-            # print("Number of processed elements: {} doesn't equal actual elements: {}".format(cnt, len(self.__json_parser(self.schema))))
             self.log.warning("Number of processed elements: {} doesn't equal actual elements: {}".format(cnt, len(self.__json_parser(self.schema))))
             # sys.exit(1)
             # return {}

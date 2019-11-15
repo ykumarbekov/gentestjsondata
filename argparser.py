@@ -5,16 +5,32 @@ from tools import *
 
 
 class ArgParser(object):
+    '''
+    Filename: argparser.py. Class: ArgParser
+
+    The ArgParser uses for parsing program arguments
+    Class contains main function:
+    - parse_args
+        Use parse_args, to parse and validate program arguments
+
+    Constructor
+        Input parameter: d_data dictionary which contains values from default configuration file
+    '''
 
     def __init__(self, d_data):
         self.d_data = d_data
         self.log = create_logger()
 
     def parse_args(self):
+        '''
+        parse_args - parsing and validating program arguments
+        :return: dictionary
+        '''
         result = {}
+
         parser = arg.ArgumentParser(
             prog="gentestdata",
-            usage="%(prog)s options",
+            usage="%(prog)s parameters",
             description="Utility for generating test JSON data for input schema")
 
         parser.add_argument(
@@ -49,10 +65,10 @@ class ArgParser(object):
             dest="schema"
         )
         parser.add_argument(
-            "--output-data-lines",
-            help="Number of lines. Default: {}".format(self.d_data["output-data-lines"]),
-            default=self.d_data["output-data-lines"],
-            dest="output_data_lines"
+            "--data-lines",
+            help="Number of lines for output files. Default: {}".format(self.d_data["data-lines"]),
+            default=self.d_data["data-lines"],
+            dest="data_lines"
         )
         parser.add_argument(
             "--clear-output-data",
@@ -63,34 +79,34 @@ class ArgParser(object):
         )
 
         a = parser.parse_args()
-        result["output_path"] = self.output_path_validator(a.output_path)
+        result["output_path"] = self.__output_path_validator(a.output_path)
         result["filename"] = a.file_name
-        result["file_count"] = self.files_count_validator(int(a.file_count))
+        result["file_count"] = self.__files_count_validator(int(a.file_count))
         result["file_prefix"] = a.file_prefix
         result["schema"] = a.schema
-        result["output_lines"] = a.output_data_lines
+        result["output_lines"] = a.data_lines
         result["clear_data"] = a.clear_data
 
         return result
 
-    def output_path_validator(self, p):
+    def __output_path_validator(self, p):
         if not os.path.exists(p):
             output_path = os.path.join(os.getcwd(), p)
         else:
             output_path = p
-        # *********************
+
         if not os.path.exists(output_path):
             self.log.warning("Cannot find: {}".format(output_path))
-            sys.exit(-1)
+            sys.exit(1)
         if not os.path.isdir(output_path):
             self.log.warning("Output path is not directory")
             sys.exit(1)
 
         return output_path
 
-    def files_count_validator(self, c):
+    def __files_count_validator(self, c):
         if c < 0:
-            self.log.warning("File count parameter negative")
+            self.log.warning("File count parameter is negative. Must be 0 or above")
             sys.exit(1)
 
         return c
