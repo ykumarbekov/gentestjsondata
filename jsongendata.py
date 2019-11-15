@@ -97,7 +97,7 @@ class JsonGenData(object):
         if cnt != len(self.__json_parser(self.schema)):
             self.log.warning("Number of processed elements: {} doesn't equal actual elements: {}".format(cnt, len(self.__json_parser(self.schema))))
             # sys.exit(1)
-            # return {}
+            return {}
 
         return ddd
 

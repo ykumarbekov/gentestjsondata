@@ -72,7 +72,7 @@ class ArgParser(object):
         )
         parser.add_argument(
             "--clear-output-data",
-            choices=[0, 1],
+            choices=["0", "1"],
             help="Flag, for cleaning previous generated data. Default: {}".format(self.d_data["clear-output-data"]),
             default=self.d_data["clear-output-data"],
             dest="clear_data"
@@ -85,7 +85,7 @@ class ArgParser(object):
         result["file_prefix"] = a.file_prefix
         result["schema"] = a.schema
         result["output_lines"] = a.data_lines
-        result["clear_data"] = a.clear_data
+        result["clear_data"] = int(a.clear_data)
 
         return result
 

@@ -43,6 +43,16 @@ class DataProcessor(object):
             self.log.info("Started generating data for output files")
             try:
                 for f in output_f:
+                    '''
+                    Validating input schema by generating one test row
+                    if schema incorrect it returns empty dict and raises Exception
+                    '''
+                    if self.cnt_output > 0:
+                        if len(self.json_gnr.run_generator()) == 0:
+                            raise Exception("Stop data processing. Exit")
+                    '''
+                    ------------------------------------------------
+                    '''
                     self.log.info("Saving in file {} ...".format(f))
                     with open(f, "w+") as ff:
                         for i in range(self.cnt_output):

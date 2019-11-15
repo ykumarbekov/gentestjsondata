@@ -25,11 +25,11 @@ def start():
 
     # Cleaning output path
     if args["clear_data"] == 1:
-        log.warning("Removing all files matched: {} on output path...".format(args["filename"]))
+        log.warning("Removing all files matched to base name: {} ...".format(args["filename"]))
         clear_folder(args["output_path"], args["filename"])
 
     # Generating output data, as input parameters - dictionary with parsed values
-    pr.DataProcessor(args).run_process()
+    # pr.DataProcessor(args).run_process()
 
     '''
     for i in output_files(

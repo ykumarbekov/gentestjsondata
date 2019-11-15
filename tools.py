@@ -31,6 +31,8 @@ def create_logger():
     logger.setLevel(logging.INFO)
     stream_handler = logging.StreamHandler()
     stream_handler.setFormatter(formatter)
+    if logger.hasHandlers():
+        logger.handlers.clear()
     logger.addHandler(stream_handler)
 
     return logger
@@ -61,13 +63,13 @@ def output_files(fc, prefix, output_path, filename):
     if fc > 0:
         if prefix == "count":
             for n in range(fc):
-                f_names.append(os.path.join(output_path, __join_name(str(n), filename)))
+                f_names.append(os.path.join(output_path, __join_prefix_to_name(str(n), filename)))
         elif prefix == "random":
             for n in range(fc):
-                f_names.append(os.path.join(output_path, __join_name(str(rnd.randint(0, 100000)), filename)))
+                f_names.append(os.path.join(output_path, __join_prefix_to_name(str(rnd.randint(0, 100000)), filename)))
         else:
             for n in range(fc):
-                f_names.append(os.path.join(output_path, __join_name(str(uuid.uuid4().hex), filename)))
+                f_names.append(os.path.join(output_path, __join_prefix_to_name(str(uuid.uuid4().hex), filename)))
     return f_names
 
 
@@ -77,10 +79,10 @@ def clear_folder(f_path, f_name):
     try:
         for r, d, f in os.walk(f_path):
             for ff in f:
-                if f_name in ff:
+                if __test_filename(f_name, ff):
                     fff = os.path.join(r, ff)
                     print("File: {} will be deleted".format(fff))
-                    # os.remove(fff)
+                    os.remove(fff)
     except Exception as ex:
         log.error(ex)
         status = 0
@@ -88,6 +90,14 @@ def clear_folder(f_path, f_name):
     return status
 
 
-def __join_name(prefix, filename):
+def __test_filename(f1, f2):
+    if os.path.splitext(f1)[0] in os.path.splitext(f2)[0] and \
+       os.path.splitext(f1)[1] in os.path.splitext(f2)[1]:
+        return True
+    else:
+        return False
+
+
+def __join_prefix_to_name(prefix, filename):
     return os.path.splitext(filename)[0] + "_" + prefix + os.path.splitext(filename)[1]
 
