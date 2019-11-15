@@ -1,4 +1,4 @@
-GENTESTDATA - Console utility to generate test data in JSON format based on input schema
+**GENTESTDATA - Console utility to generate test data in JSON format based on input schema**
 ------------------------
 run:
     python main.py options, or python main.py --h|help
