@@ -8,6 +8,10 @@ config_file = "default.ini"
 
 
 def start():
+    '''
+    Main function starts processing, use python3 main.py arguments
+    :return: None
+    '''
 
     log = create_logger()
 

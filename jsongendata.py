@@ -8,12 +8,12 @@ class JsonGenData(object):
     Filename: jsongendata.py. Class: JsonGenData
 
     The JsonGenData uses for parsing input JSON schema and generating output row
-    Class contains main function:
+    Class contains next functions:
     - generate_json_row
-        Use generate_json_row, to parse and validate program arguments
+    - run_generator
 
     Constructor
-        Initializes schema parameter from file or from command argument
+        Initializes schema parameter from file or from command arguments
         Input parameter: d_data - dictionary contains program arguments
     '''
 
@@ -43,7 +43,7 @@ class JsonGenData(object):
         Private function
         generate_json_row - validates, parses and generates output dictionary with all necessary values
         :param dd:
-        :return:
+        :return: generated dictionary
         '''
         try:
             ddd = json_row_generator(dd)
@@ -60,8 +60,8 @@ class JsonGenData(object):
     def run_generator(self):
         '''
         Public function
-        run_generator runs private function generate_json_row
-        :return:
+        run_generator: runs private function generate_json_row
+        :return: generated dictionary
         '''
         return self.__generate_json_row(self.__json_parser(self.schema))
 

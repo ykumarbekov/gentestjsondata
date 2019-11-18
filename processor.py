@@ -30,7 +30,7 @@ class DataProcessor(object):
 
     def run_process(self):
         '''
-        run_process starts generating and saving data to files
+        run_process starts generating and saves data in files
         before saving it validates schema and raises exception if schema is not valid
         :return: None
         '''

@@ -1,6 +1,4 @@
 import argparse as arg
-import os
-import sys
 from tools import *
 
 
@@ -14,7 +12,7 @@ class ArgParser(object):
         Use parse_args, to parse and validate program arguments
 
     Constructor
-        Input parameter: d_data dictionary which contains values from default configuration file
+        Input parameter: d_data - dictionary which contains values from default configuration file
     '''
 
     def __init__(self, d_data):
