@@ -40,10 +40,10 @@ class JsonGenData(object):
 
     def __generate_json_row(self, dd):
         '''
-        Private function
-        generate_json_row - validates, parses and generates output dictionary with all necessary values
-        :param dd:
-        :return: generated dictionary
+        Local function
+        Validates, parses and generates output dictionary with all necessary values
+        :param (dict) dd:
+        :return: dict
         '''
         try:
             ddd = json_row_generator(dd)
@@ -59,9 +59,8 @@ class JsonGenData(object):
 
     def run_generator(self):
         '''
-        Public function
-        run_generator: runs private function generate_json_row
-        :return: generated dictionary
+        Validates, parses and generates output dictionary with all necessary values
+        :return: dict
         '''
         return self.__generate_json_row(self.__json_parser(self.schema))
 

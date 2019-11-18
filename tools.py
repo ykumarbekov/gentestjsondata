@@ -8,8 +8,8 @@ import time
 
 def create_fn_logger(log_name):
     '''
-    create_fn_logger uses for initialization file logger
-    :param log_name:
+    Initializes file logger
+    :param (string) log_name:
     :return: logger
     '''
     logger = logging.getLogger("gentestjsondata-app")
@@ -26,7 +26,7 @@ def create_fn_logger(log_name):
 
 def create_logger():
     '''
-    create logger uses for initialization simple console logger
+    Initializes simple console logger
     :return: logger
     '''
     logger = logging.getLogger("gentestjsondata-app")
@@ -43,8 +43,8 @@ def create_logger():
 
 def rnd_list_value(lst):
     '''
-    rnd_list_value uses to choose random value from the List
-    :param lst:
+    Returns random value from the List
+    :param (list) lst:
     :return: random value
     '''
     if len(lst) > 0:
@@ -55,12 +55,12 @@ def rnd_list_value(lst):
 
 def output_files(fc, prefix, output_path, filename):
     '''
-    output_files uses for generating output files according with input parameters
-    :param fc:
-    :param prefix:
-    :param output_path:
-    :param filename:
-    :return: filename list <can be empty if one of input values is wrong>
+    Generates output files according with input parameters
+    :param (int) fc:
+    :param (string) prefix:
+    :param (string) output_path:
+    :param (string) filename:
+    :return: list[] - file names
     '''
     f_names = []
     if fc > 0:
@@ -78,10 +78,10 @@ def output_files(fc, prefix, output_path, filename):
 
 def clear_folder(f_path, f_name):
     '''
-    clear_folder for removing files from target folder
-    :param f_path:
-    :param f_name:
-    :return: status: 1 - successful or 0 - unsuccessful
+    Deletes files from target folder
+    :param (string) f_path:
+    :param (string) f_name:
+    :return: (int) status: 1 - successful or 0 - unsuccessful
     '''
     log = create_logger()
     status = 1
@@ -100,6 +100,12 @@ def clear_folder(f_path, f_name):
 
 
 def test_file_names(f1, f2):
+    '''
+    Compare and search f1 substring in f2 string
+    :param (string) f1:
+    :param (string) f2:
+    :return: (Bool) True / False
+     '''
     if os.path.splitext(f1)[0] in os.path.splitext(f2)[0] and \
        os.path.splitext(f1)[1] in os.path.splitext(f2)[1]:
         return True
@@ -113,9 +119,9 @@ def __join_prefix_to_name(prefix, filename):
 
 def json_row_generator(dd):
     '''
-    json_row_generator - validates, parses and generates output dictionary with all necessary values
-    :param dd:
-    :return:
+    Validates, parses and generates dictionary with all necessary values
+    :param (dict) dd:
+    :return: dict
     '''
     log = create_logger()
     ddd = {}

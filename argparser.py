@@ -12,7 +12,7 @@ class ArgParser(object):
         Use parse_args, to parse and validate program arguments
 
     Constructor
-        Input parameter: d_data - dictionary which contains values from default configuration file
+        Input parameter: (dict) d_data - contains values from default configuration file
     '''
 
     def __init__(self, d_data):
@@ -21,8 +21,8 @@ class ArgParser(object):
 
     def parse_args(self):
         '''
-        parse_args - parsing and validating program arguments
-        :return: dictionary
+        Parses and validates program arguments
+        :return: dict
         '''
         result = {}
 
