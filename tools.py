@@ -2,8 +2,16 @@ import logging
 import random as rnd
 import uuid
 import os
-import sys
 import time
+
+default_ini_args = [
+    'output-path',
+    'file-name',
+    'file-count',
+    'file-prefix',
+    'schema',
+    'data-lines',
+    'clear-output-data']
 
 
 def create_fn_logger(log_name):
