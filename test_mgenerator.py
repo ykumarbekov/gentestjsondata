@@ -18,11 +18,19 @@ class TestTools(TestCase):
         },
         {
             "a1": "['el1','el2']", "a2": "int:[10,20,30]", "a3": "int:rand", "a4": "str:rand"
-        }]
+        },
+        {
+            "a1": "['el1','el2']", "a2": "int:[10,20,30]", "a3": "int:rand", "a4": "int:rand(1,1)"
+        },
+        {
+            "a1": "['el1','el2']", "a2": "int", "a3": "int:rand", "a4": "int:rand(1,10)"
+        }
+    ]
 
     def test_json_row_validator(self):
         for k in self.d_data:
-            self.assertEqual(len(json_row_generator(k)), len(k), msg="Schema contains non-parsing elements")
+            self.assertEqual(len(json_row_generator(k)), len(k),
+                             msg="Non-parsing elements: {}".format(k))
 
     def test_output_files(self):
         f_lst = output_files(3, "count", "/path", "data.json")
